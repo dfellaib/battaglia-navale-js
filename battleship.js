@@ -12,6 +12,9 @@ const SIMBOLO_MANCATO = "O";
 const SIMBOLO_COLPITO = "X";
 const SIMBOLO_NAVE = "N";
 
+let colpi = 0; // Contatore colpi sparati 
+let colpite = 0; // Contatore caselle colpite
+
 // F1. Griglia è una matrice di gioco
 // TODO: Migliorare grafica della griglia 
 function stampaGriglia(griglia) {
@@ -69,4 +72,29 @@ for (let i = 0; i < LUNGHEZZA_NAVE; i++) {
 
 stampaGriglia(campo);
 console.log();
-stampaGriglia(navi); 
+stampaGriglia(navi);
+
+while (colpite < LUNGHEZZA_NAVE && colpi < MAX_COLPI) {
+    console.log();
+
+    // TODO: quel 4 nella stringa deve essere parametrico DIM-1
+    const rigaAttacco = Number(prompt("Riga (0-4): "));
+    const colonnaAttacco = Number(prompt("Riga (0-4): "));
+
+    // il continue perché se la coordinata in qualche modo non è valida devo fermarmi e richiedere un input valido,
+    // non posso proseguire
+    if (!Number.isInteger(rigaAttacco) || !Number.isInteger(colonnaAttacco)
+        || rigaAttacco < 0 || rigaAttacco > DIM || colonnaAttacco < 0 || colonnaAttacco > DIM) {
+
+        // TODO: Ri-scrivere in console quale era la coordinata
+        console.log("Coordinata non valida, riprova."); 
+        continue; 
+    }
+
+    if (campo[rigaAttacco][colonnaAttacco] !== SIMBOLO_ACQUA) {
+        console.log("Hai già sparato in questa casella, ripova."); 
+        continue;
+    }
+
+    colpi++; // Coordinata valida e nuova, aggiungo un +1 al contatore dei colpi sparati
+}
