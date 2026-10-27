@@ -1,0 +1,24 @@
+{
+  "name": "battaglia-navale",
+  "version": "1.0.0",
+  "description": "Esercizio demo per la battaglia navale",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dfellaib/battaglia-navale-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dfellaib/battaglia-navale-js/issues"
+  },
+  "homepage": "https://github.com/dfellaib/battaglia-navale-js#readme",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
