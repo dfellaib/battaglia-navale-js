@@ -71,15 +71,14 @@ for (let i = 0; i < LUNGHEZZA_NAVE; i++) {
 
 
 stampaGriglia(campo);
-console.log();
+console.log("[LOG] Posizione navi:");
 stampaGriglia(navi);
 
 while (colpite < LUNGHEZZA_NAVE && colpi < MAX_COLPI) {
     console.log();
 
-    // TODO: quel 4 nella stringa deve essere parametrico DIM-1
-    const rigaAttacco = Number(prompt("Riga (0-4): "));
-    const colonnaAttacco = Number(prompt("Riga (0-4): "));
+    const rigaAttacco = Number(prompt(`Riga (0-${DIM - 1}): `));
+    const colonnaAttacco = Number(prompt(`Riga (0-${DIM - 1}): `));
 
     // il continue perché se la coordinata in qualche modo non è valida devo fermarmi e richiedere un input valido,
     // non posso proseguire
@@ -87,14 +86,36 @@ while (colpite < LUNGHEZZA_NAVE && colpi < MAX_COLPI) {
         || rigaAttacco < 0 || rigaAttacco > DIM || colonnaAttacco < 0 || colonnaAttacco > DIM) {
 
         // TODO: Ri-scrivere in console quale era la coordinata
-        console.log("Coordinata non valida, riprova."); 
-        continue; 
+        console.log("Coordinata non valida, riprova.");
+        continue;
     }
 
     if (campo[rigaAttacco][colonnaAttacco] !== SIMBOLO_ACQUA) {
-        console.log("Hai già sparato in questa casella, ripova."); 
+        console.log("Hai già sparato in questa casella, ripova.");
         continue;
     }
 
     colpi++; // Coordinata valida e nuova, aggiungo un +1 al contatore dei colpi sparati
+
+    // Il colpo ha coordinate valide e non ha mai sparato in quel punto. 
+    // C'è  una "N" in quella casella? 
+    if (navi[rigaAttacco][colonnaAttacco] === SIMBOLO_NAVE) {
+        console.log("Colpita!");
+        campo[rigaAttacco][colonnaAttacco] = SIMBOLO_COLPITO;
+        colpite++;
+    } else {
+        console.log("Mancata!");
+        campo[rigaAttacco][colonnaAttacco] = SIMBOLO_MANCATO;
+    }
+
+    console.log(`Colpi rimasti: ${MAX_COLPI - colpi}`);
+    stampaGriglia(campo);
+}
+
+// Se ho colpito tutta la mia nave, esco dal gioco
+if (colpite === LUNGHEZZA_NAVE) {
+    console.log("Nave affondata, hai vinto!");
+} else {
+    console.log("Hai perso! La nave era qui: ");
+    stampaGriglia(navi);
 }
