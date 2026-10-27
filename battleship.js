@@ -38,4 +38,27 @@ function creaGriglia() {
 const campo = creaGriglia(); 
 const navi = creaGriglia(); 
 
+// Posizionamento esplicito sarebbe simile a campo[1][2] = "N"..
+
+// F5: Crea casualmente la nave in griglia (orizzontale)
+/**
+ * Per generare casualmente anche l'orientament posso sfruttare 
+ * Math.random() < 0.5 (torna vero se esce da 0.4 in giù) oppure
+ * generare numeri fino a 2 e calcolare se è pari o dispari
+ */
+const rigaNave = Math.floor(Math.random() * DIM); 
+
+// DIM - LUNGHEZZA_NAVE + 1 perchè la riga può essere tra 0 e 4 ma non 
+// non la colonna in quanto poi devo fare il +3 della lunghezza nave 
+// e rischio di andare fuori matrice (Error)
+// da 0 a (5 - 3 + 1) --> math.floor arrotonda per difetto rischio di 
+// "mangiarmi" un numero (fino a 4 incluso) 
+const colonnaNave = Math.floor(Math.random() * (DIM - LUNGHEZZA_NAVE + 1)); 
+
+
+// Stringa di log da togliere successivamente
+console.log("[LOG] Coordinate riga e colonna: ", rigaNave, colonnaNave); 
+
+
+
 stampaGriglia(campo); 
